@@ -18,8 +18,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Rutas de cliente (CRUD)
 app.use(clientRoutes);
 
-// Redireccionar / a /index (lista de clientes/miembros)
-app.get('/', (req, res) => res.redirect('/index'));
+app.get('/', (req, res) => {
+  res.render('login', { error: null });
+});
 
 // Si quieres, puedes poner un middleware de error 404 al final:
 app.use((req, res) => {
