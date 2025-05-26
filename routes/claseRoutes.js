@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const claseController = require('../controllers/claseController');
 
-router.get('/clases', claseController.listarClases);
-router.get('/clases/agregar', claseController.renderAgregarClase);
-router.post('/clases/agregar', claseController.agregarClase);
-router.get('/clases/editar/:id', claseController.renderEditarClase);
-router.post('/clases/editar/:id', claseController.editarClase);
-router.post('/clases/eliminar/:id', claseController.eliminarClase);
+router.get('/', claseController.listarClases);
+router.get('/agregar', claseController.renderAgregarClase);
+router.post('/agregar', claseController.agregarClase);
+router.get('/editar/:id', claseController.renderEditarClase);
+router.post('/editar/:id', claseController.editarClase);
+router.post('/eliminar/:id', claseController.eliminarClase);
 
 module.exports = router;
