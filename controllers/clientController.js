@@ -1,4 +1,4 @@
-const clientDao = require('../dao/clientDao');
+const clientDao = require('../DAOs/clientDao');
 
 exports.listarClientes = (req, res) => {
   res.render('index', { clients: clientDao.getAll() });

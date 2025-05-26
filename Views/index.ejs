@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
     </style>
 </head>
+
 <body class="bg-gray-100">
-    <header class="bg-indigo-600 text-white py-4 flex justify-between items-center shadow-md sticky top-0 z-10 rounded-md">
+    <header
+        class="bg-indigo-600 text-white py-4 flex justify-between items-center shadow-md sticky top-0 z-10 rounded-md">
         <div class="logo text-xl font-bold ml-4">GYMCODE</div>
         <nav class="mr-4">
             <ul class="flex space-x-4">
@@ -27,69 +32,228 @@
     </header>
 
     <main class="container mx-auto mt-8 p-4">
-        <!-- ... Secciones de inicio y clases igual ... -->
+        <section id="inicio" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-3xl font-semibold text-indigo-700 mb-4">¡Ponte en forma con nosotros!</h2>
+            <p class="text-gray-700 mb-4">El mejor lugar en Petén para alcanzar tus metas de fitness. Ofrecemos un
+                ambiente amigable, entrenadores expertos y una gran variedad de clases.</p>
+            <a href="#contacto"
+                class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">¡Contáctanos!</a>
+        </section>
+
 
         <section id="miembros" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestros Miembros</h2>
             <p class="text-gray-700 mb-4">Aquí podrás ver la lista de miembros activos y gestionar sus membresías.</p>
-            <section id="miembros" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
-    <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestros Miembros</h2>
-    <p class="text-gray-700 mb-4">Aquí podrás ver la lista de miembros activos y gestionar sus membresías.</p>
-    <div id="member-list" class="mb-4">
-    <% clients.forEach(function(miembro){ %>
-        <div class="bg-white rounded-md shadow-sm p-4 mb-2 flex flex-col sm:flex-row justify-between items-center">
-            <div>
-                <h4 class="font-semibold">Miembro <%= miembro.id %>: <%= miembro.nombre %></h4>
-                <p class="text-sm text-gray-500">Membresía: <%= miembro.membresia %></p>
+            <div id="member-list" class="mb-4">
+                <% clients.forEach(function(miembro){ %>
+                    <div
+                        class="bg-white rounded-md shadow-sm p-4 mb-2 flex flex-col sm:flex-row justify-between items-center">
+                        <div>
+                            <h4 class="font-semibold">Miembro <%= miembro.id %>: <%= miembro.nombre %>
+                            </h4>
+                            <p class="text-sm text-gray-500">Membresía: <%= miembro.membresia %>
+                            </p>
+                        </div>
+                        <div class="flex space-x-2 mt-2 sm:mt-0">
+                            <a href="/miembro/<%= miembro.id %>"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ver
+                                ficha de socio</a>
+                            <a href="/editar/<%= miembro.id %>"
+                                class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full">Editar</a>
+                            <form action="/eliminar/<%= miembro.id %>" method="POST"
+                                onsubmit="return confirm('¿Eliminar este cliente?');" style="display:inline;">
+                                <button type="submit"
+                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }); %>
             </div>
-            <div class="flex space-x-2 mt-2 sm:mt-0">
-                <a href="/miembro/<%= miembro.id %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ver ficha de socio</a>
-                <a href="/editar/<%= miembro.id %>" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full">Editar</a>
-                <form action="/eliminar/<%= miembro.id %>" method="POST" onsubmit="return confirm('¿Eliminar este cliente?');" style="display:inline;">
-                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Eliminar</button>
-                </form>
-            </div>
-        </div>
-    <% }); %>
-    </div>
-    <a href="/inscribir" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Agregar Nuevo Miembro</a>
-</section>
-            <button onclick="addNewMember()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Agregar Nuevo Miembro</button>
+            <a href="/inscribir"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Agregar Nuevo
+                Miembro</a>
         </section>
-        <section id="inscribir-cliente" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
-    <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Inscribir Nuevo Cliente</h2>
-    <form action="/inscribir" method="POST" class="space-y-4">
-        <div>
-            <label for="nuevo-nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre Completo:</label>
-            <input type="text" id="nuevo-nombre" name="nombre" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-        <div>
-            <label for="nuevo-email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-            <input type="email" id="nuevo-email" name="email" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-        <div>
-            <label for="nuevo-telefono" class="block text-gray-700 text-sm font-bold mb-2">Teléfono:</label>
-            <input type="text" id="nuevo-telefono" name="telefono" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-        <div>
-            <label for="nuevo-membresia" class="block text-gray-700 text-sm font-bold mb-2">Estado de Membresía:</label>
-            <select id="nuevo-membresia" name="membresia"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <option value="Activa">Activa</option>
-                <option value="Inactiva">Inactiva</option>
-            </select>
-        </div>
-        <button type="submit"
-                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
-            Inscribir Cliente
-        </button>
-    </form>
-</section>
+        <section id="clases" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestras Clases</h2>
+            <p class="text-gray-700 mb-4">Echa un vistazo a las clases que ofrecemos.</p>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Zumba <span
+                        class="text-gray-500">Martes y Jueves 7PM</span></li>
+                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Spinning <span
+                        class="text-gray-500">Lunes y Miércoles 6PM</span></li>
+                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Yoga <span
+                        class="text-gray-500">Viernes 8AM</span></li>
+                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Pilates <span
+                        class="text-gray-500">Sábado 9AM</span></li>
+                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Crossfit <span
+                        class="text-gray-500">Lunes a Viernes 5PM</span></li>
+                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Boxeo <span
+                        class="text-gray-500">Martes y Jueves 8PM</span></li>
+            </ul>
+        </section>
+        <section id="contacto" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-3xl font-semibold text-indigo-700 mb-4">¡Contáctanos!</h2>
+            <p class="text-gray-700 mb-4">Estamos ubicados en Petén. ¡Visítanos o envíanos un mensaje!</p>
+            <address class="text-gray-700 mb-2">
+                <strong>Dirección:</strong> Calle del Olvido Petén, Guatemala
+            </address>
+            <p class="text-gray-700 mb-2"><strong>Teléfono:</strong> +502 XXXX-XXXX</p>
+            <p class="text-gray-700"><strong>Email:</strong> info@gymcode.com</p>
+            <form id="contact-form" class="mt-4">
+                <div class="mb-4">
+                    <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <div id="nombre-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                    <input type="email" id="email" name="email"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <div id="email-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                </div>
+                <div class="mb-4">
+                    <label for="mensaje" class="block text-gray-700 text-sm font-bold mb-2">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <div id="mensaje-error" class="text-red-500 text-xs italic" style="display: none;"></div>
+                </div>
+                <button type="submit"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Enviar
+                    Mensaje</button>
+            </form>
+        </section>
+
+
         <!-- ... resto de secciones igual ... -->
     </main>
-    <!-- ... Footer y scripts igual ... -->
+    <footer class="bg-gray-800 text-white py-4 text-center rounded-md shadow-md">
+        <p>&copy; 2025 GYMCODE</p>
+    </footer>
+    <script>
+        function simulateMembershipChange(memberId) {
+            const memberList = document.getElementById('member-list');
+            const memberDivs = memberList.getElementsByTagName('div');
+            if (memberId > 0 && memberId <= memberDivs.length) {
+                const memberDiv = memberDivs[memberId - 1];
+                const membershipStatus = memberDiv.querySelector('p');
+                const changeButton = memberDiv.querySelector('button');
+
+                if (membershipStatus.textContent.includes('Activa')) {
+                    membershipStatus.textContent = 'Membresía: Inactiva';
+                    changeButton.textContent = 'Activar Membresía';
+                    changeButton.className = 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out';
+                } else {
+                    membershipStatus.textContent = 'Membresía: Activa';
+                    changeButton.textContent = 'Cambiar Membresía';
+                    changeButton.className = 'bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out';
+                }
+            }
+        }
+
+        function addNewMember() {
+            const memberList = document.getElementById('member-list');
+            const newMemberNumber = memberList.getElementsByTagName('div').length + 1;
+            const newMemberDiv = document.createElement('div');
+            newMemberDiv.className = 'bg-white rounded-md shadow-sm p-4 mb-2 flex justify-between items-center';
+            newMemberDiv.innerHTML = `
+                <div>
+                    <h4 class="font-semibold">Miembro ${newMemberNumber}: Nuevo Miembro</h4>
+                    <p class="text-sm text-gray-500">Membresía: Activa</p>
+                </div>
+                <button onclick="simulateMembershipChange(${newMemberNumber})" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Cambiar Membresía</button>
+            `;
+            memberList.appendChild(newMemberDiv);
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+
+            // Resetear mensajes de error
+            document.getElementById('nombre-error').style.display = 'none';
+            document.getElementById('email-error').style.display = 'none';
+            document.getElementById('mensaje-error').style.display = 'none';
+
+            // Obtener valores de los campos
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+
+            let errores = false;
+
+            // Validar nombre
+            if (nombre === '') {
+                document.getElementById('nombre-error').textContent = 'Por favor, ingrese su nombre.';
+                document.getElementById('nombre-error').style.display = 'block';
+                errores = true;
+            }
+
+            // Validar email
+            if (email === '') {
+                document.getElementById('email-error').textContent = 'Por favor, ingrese su email.';
+                document.getElementById('email-error').style.display = 'block';
+                errores = true;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('email-error').textContent = 'Ingrese un email válido.';
+                document.getElementById('email-error').style.display = 'block';
+                errores = true;
+            }
+
+            // Validar mensaje
+            if (mensaje === '') {
+                document.getElementById('mensaje-error').textContent = 'Por favor, ingrese su mensaje.';
+                document.getElementById('mensaje-error').style.display = 'block';
+                errores = true;
+            }
+
+            if (!errores) {
+                // Simular envío del mensaje (aquí iría la lógica real con fetch o similar)
+                alert('Mensaje enviado correctamente. ¡Gracias!');
+                document.getElementById('contact-form').reset(); // Limpiar el formulario
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            document.getElementById('username-error').style.display = 'none';
+            document.getElementById('password-error').style.display = 'none';
+            document.getElementById('login-message').style.display = 'none';
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            let errores = false;
+
+            if (username === '') {
+                document.getElementById('username-error').textContent = 'Por favor, ingrese su usuario.';
+                document.getElementById('username-error').style.display = 'block';
+                errores = true;
+            }
+
+            if (password === '') {
+                document.getElementById('password-error').textContent = 'Por favor, ingrese su contraseña.';
+                document.getElementById('password-error').style.display = 'block';
+                errores = true;
+            }
+
+            if (!errores) {
+                // Simulación de inicio de sesión (sin base de datos)
+                if (username === 'admin' && password === 'password') {
+                    document.getElementById('login-message').textContent = 'Inicio de sesión exitoso. Redirigiendo...';
+                    document.getElementById('login-message').style.display = 'block';
+                    // Aquí podrías redirigir a otra página después de un breve delay
+                    setTimeout(function () {
+                        window.location.href = '#inicio'; // Por ejemplo, redirigir al inicio
+                    }, 2000);
+                } else {
+                    document.getElementById('login-message').textContent = 'Credenciales incorrectas. Intente nuevamente.';
+                    document.getElementById('login-message').style.display = 'block';
+                }
+            }
+        });
+
+    </script>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-const Client = require('../models/client');
+const Client = require('../models/cliente');
 let clients = [
   new Client(1, 'Juan Pérez', 'juan.perez@email.com', '555-1234', 'Activa'),
   new Client(2, 'María García', 'maria.garcia@email.com', '555-5678', 'Inactiva'),
