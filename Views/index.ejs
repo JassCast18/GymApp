@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYMCODE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-indigo-600 text-white py-4 flex justify-between items-center shadow-md sticky top-0 z-10 rounded-md">
+        <div class="logo text-xl font-bold ml-4">GYMCODE</div>
+        <nav class="mr-4">
+            <ul class="flex space-x-4">
+                <li><a href="#inicio" class="hover:text-indigo-200 no-underline">Inicio</a></li>
+                <li><a href="#miembros" class="hover:text-indigo-200 no-underline">Miembros</a></li>
+                <li><a href="#clases" class="hover:text-indigo-200 no-underline">Clases</a></li>
+                <li><a href="#contacto" class="hover:text-indigo-200 no-underline">Contacto</a></li>
+                <li><a href="/login" class="hover:text-indigo-200 no-underline">Cerrar Sesion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto mt-8 p-4">
+        <!-- ... Secciones de inicio y clases igual ... -->
+
+        <section id="miembros" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestros Miembros</h2>
+            <p class="text-gray-700 mb-4">Aquí podrás ver la lista de miembros activos y gestionar sus membresías.</p>
+            <section id="miembros" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
+    <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestros Miembros</h2>
+    <p class="text-gray-700 mb-4">Aquí podrás ver la lista de miembros activos y gestionar sus membresías.</p>
+    <div id="member-list" class="mb-4">
+    <% clients.forEach(function(miembro){ %>
+        <div class="bg-white rounded-md shadow-sm p-4 mb-2 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <h4 class="font-semibold">Miembro <%= miembro.id %>: <%= miembro.nombre %></h4>
+                <p class="text-sm text-gray-500">Membresía: <%= miembro.membresia %></p>
+            </div>
+            <div class="flex space-x-2 mt-2 sm:mt-0">
+                <a href="/miembro/<%= miembro.id %>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Ver ficha de socio</a>
+                <a href="/editar/<%= miembro.id %>" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full">Editar</a>
+                <form action="/eliminar/<%= miembro.id %>" method="POST" onsubmit="return confirm('¿Eliminar este cliente?');" style="display:inline;">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+    </div>
+    <a href="/inscribir" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Agregar Nuevo Miembro</a>
+</section>
+            <button onclick="addNewMember()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">Agregar Nuevo Miembro</button>
+        </section>
+        <section id="inscribir-cliente" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
+    <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Inscribir Nuevo Cliente</h2>
+    <form action="/inscribir" method="POST" class="space-y-4">
+        <div>
+            <label for="nuevo-nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre Completo:</label>
+            <input type="text" id="nuevo-nombre" name="nombre" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div>
+            <label for="nuevo-email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+            <input type="email" id="nuevo-email" name="email" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div>
+            <label for="nuevo-telefono" class="block text-gray-700 text-sm font-bold mb-2">Teléfono:</label>
+            <input type="text" id="nuevo-telefono" name="telefono" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div>
+            <label for="nuevo-membresia" class="block text-gray-700 text-sm font-bold mb-2">Estado de Membresía:</label>
+            <select id="nuevo-membresia" name="membresia"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="Activa">Activa</option>
+                <option value="Inactiva">Inactiva</option>
+            </select>
+        </div>
+        <button type="submit"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+            Inscribir Cliente
+        </button>
+    </form>
+</section>
+        <!-- ... resto de secciones igual ... -->
+    </main>
+    <!-- ... Footer y scripts igual ... -->
+</body>
+</html>

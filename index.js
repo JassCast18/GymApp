@@ -1,39 +1,39 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
-
+const authRoutes = require('./routes/authRoutes');
+const clientDao = require('./dao/clientDao');
 const app = express();
-const port = 3000; // Puedes cambiar el puerto si lo deseas
 
-app.use(express.static(path.join(__dirname, 'static')));
-
-// Configurar el motor de plantillas (EJS en este caso)
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'templates'));
+app.set('views', path.join(__dirname, 'views'));
 
-// Configurar el middleware para servir archivos estáticos
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(authRoutes);
 
-// Rutas
+// Ruta raíz (opcional, si quieres permitir ir directo a login)
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Gimnasio Poptún' });
+  res.redirect('/login');
 });
 
-app.get('/members', (req, res) => {
-  res.render('members', { title: 'Miembros - Gimnasio Poptún' });
+app.get('/index', (req, res) => {
+  const clients = clientDao.getAll(); // o como sea tu método para obtener clientes
+  res.render('index', { clients });   // <-- Aquí pasas la variable 'clients'
 });
 
-app.get('/classes', (req, res) => {
-  res.render('classes', { title: 'Clases - Gimnasio Poptún' });
-});
+const miembros = [
+  { id: 1, nombre: 'Juan Pérez', membresia: 'Activa', email: 'juan.perez@email.com', telefono: '555-1234' },
+  { id: 2, nombre: 'María García', membresia: 'Inactiva', email: 'maria.garcia@email.com', telefono: '555-5678' },
+  { id: 3, nombre: 'Carlos López', membresia: 'Activa', email: 'carlos.lopez@email.com', telefono: '555-9876' }
+];
 
-app.get('/contact', (req, res) => {
-  res.render('contact', { title: 'Contacto - Gimnasio Poptún' });
+app.get('/miembro/:id', (req, res) => {
+  const miembro = miembros.find(m => m.id == req.params.id);
+  if (!miembro) {
+    return res.status(404).send('Socio no encontrado');
+  }
+  res.render('fichaMiembro', { miembro });
 });
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login - Gimnasio Poptún' });
-});
-
-// Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log('Servidor escuchando en http://localhost:3000');
 });
