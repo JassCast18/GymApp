@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases - GYMCODE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gimnasio Poptún</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li><a href="{{ url_for('members') }}">Miembros</a></li>
+                <li><a href="{{ url_for('classes') }}">Clases</a></li>
+                <li><a href="{{ url_for('contact') }}">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Nuestras Clases</h2>
+            <p>Echa un vistazo a las clases que ofrecemos.</p>
+            <ul>
+                <li>Zumba</li>
+                <li>Spinning</li>
+                <li>Yoga</li>
+                <li>Pilates</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Gimnasio Poptún</p>
+    </footer>
+</body>
+</html>

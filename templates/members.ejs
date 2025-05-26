@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miembros - GYMCODE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Gimnasio Poptún</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li><a href="{{ url_for('members') }}">Miembros</a></li>
+                <li><a href="{{ url_for('classes') }}">Clases</a></li>
+                <li><a href="{{ url_for('contact') }}">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Nuestros Miembros</h2>
+            <p>Aquí podrás ver la lista de miembros activos.</p>
+            <ul>
+                <li>Miembro 1</li>
+                <li>Miembro 2</li>
+                <li>Miembro 3</li>
+                </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 GYMCODE</p>
+    </footer>
+</body>
+</html>
