@@ -1,9 +1,11 @@
 const clientDao = require('../DAOs/clientDao');
+const claseDao = require('../DAOs/claseDao');
 
 exports.listarClientes = (req, res) => {
-  res.render('index', { clients: clientDao.getAll() });
+  const clients = clientDao.getAll();
+  const clases = claseDao.getAll();
+  res.render('index', { clients, clases });
 };
-
 exports.renderInscribirForm = (req, res) => {
   res.render('inscribirCliente');
 };
