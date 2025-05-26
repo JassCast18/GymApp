@@ -25,7 +25,8 @@ app.get('/', (req, res) => res.redirect('/index'));
 app.use((req, res) => {
   res.status(404).send('Página no encontrada');
 });
-
+const claseRoutes = require('./routes/claseRoutes');
+app.use(claseRoutes);
 // Lanzar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -74,23 +74,23 @@
                 Miembro</a>
         </section>
         <section id="clases" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestras Clases</h2>
-            <p class="text-gray-700 mb-4">Echa un vistazo a las clases que ofrecemos.</p>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Zumba <span
-                        class="text-gray-500">Martes y Jueves 7PM</span></li>
-                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Spinning <span
-                        class="text-gray-500">Lunes y Miércoles 6PM</span></li>
-                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Yoga <span
-                        class="text-gray-500">Viernes 8AM</span></li>
-                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Pilates <span
-                        class="text-gray-500">Sábado 9AM</span></li>
-                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Crossfit <span
-                        class="text-gray-500">Lunes a Viernes 5PM</span></li>
-                <li class="bg-white rounded-md shadow-sm p-4 flex justify-between items-center">Boxeo <span
-                        class="text-gray-500">Martes y Jueves 8PM</span></li>
-            </ul>
-        </section>
+  <h2 class="text-3xl font-semibold text-indigo-700 mb-4">Nuestras Clases</h2>
+  <a href="/clases/agregar" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mb-4 inline-block">Agregar Nueva Clase</a>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <% clases.forEach(function(clase) { %>
+      <li class="bg-white rounded-md shadow-sm p-4 flex flex-col">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold"><%= clase.nombre %></span>
+          <form action="/clases/eliminar/<%= clase.id %>" method="POST" onsubmit="return confirm('¿Eliminar esta clase?');" style="display:inline;">
+            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full text-xs">Eliminar</button>
+          </form>
+        </div>
+        <span class="text-gray-500"><%= clase.horario %></span>
+        <a href="/clases/editar/<%= clase.id %>" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded-full text-xs mt-2 self-end">Editar</a>
+      </li>
+    <% }); %>
+  </ul>
+</section>
         <section id="contacto" class="bg-indigo-100 rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-3xl font-semibold text-indigo-700 mb-4">¡Contáctanos!</h2>
             <p class="text-gray-700 mb-4">Estamos ubicados en Petén. ¡Visítanos o envíanos un mensaje!</p>
